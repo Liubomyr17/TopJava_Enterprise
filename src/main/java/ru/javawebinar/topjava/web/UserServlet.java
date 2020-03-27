@@ -10,6 +10,7 @@ public class UserServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("/user.jsp").forward(request, response);
+       // request.getRequestDispatcher("/user.jsp").forward(request, response);
+        response.sendRedirect("users.jps");
     }
 }
