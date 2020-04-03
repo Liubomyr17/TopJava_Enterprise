@@ -1,5 +1,6 @@
 package ru.javawebinar.topjava.repository.inmemory;
 
+import java.util.Objects;
 import org.springframework.stereotype.Repository;
 import ru.javawebinar.topjava.model.AbstractBaseEntity;
 import java.util.Collection;
@@ -17,6 +18,7 @@ public class InMemoryBaseRepository<T extends AbstractBaseEntity> {
     Map<Integer, T> map = new ConcurrentHashMap<>();
 
     public T save(T entry) {
+        Objects.requireNonNull(entry, "Entry must not be null");
         if (entry.isNew()) {
             entry.setId(counter.incrementAndGet());
             map.put(entry.getId(), entry);

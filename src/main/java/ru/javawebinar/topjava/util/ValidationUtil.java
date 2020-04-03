@@ -5,6 +5,10 @@ import ru.javawebinar.topjava.util.exception.NotFoundException;
 
 public class ValidationUtil {
 
+    private ValidationUtil() {
+
+    }
+
     public static <T> T checkNotFoundWithId(T object, int id) {
         return checkNotFound(object, "id=" + id);
     }
