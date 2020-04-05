@@ -24,7 +24,7 @@ public class InMemoryMealRepository implements MealRepository {
     private Map<Integer, InMemoryBaseRepository<Meal>> usersMealsMap = new ConcurrentHashMap<>();
 
     {
-        InMemoryBaseRepository<Meal> userMeals = new InMemoryBaseRepository<>();
+        var userMeals = new InMemoryBaseRepository<Meal>();
         usersMealsMap.put(UserTestData.USER_ID, userMeals);
         MealTestData.MEALS.forEach(meal -> userMeals.map.put(meal.getId(), meal));
     }
@@ -32,7 +32,7 @@ public class InMemoryMealRepository implements MealRepository {
     @Override
     public Meal save(Meal meal, int userId) {
         Objects.requireNonNull(meal, "meal must not be null");
-        InMemoryBaseRepository<Meal> meals = usersMealsMap.computeIfAbsent(userId, uid -> new InMemoryBaseRepository<>());
+        var meals = usersMealsMap.computeIfAbsent(userId, uid -> new InMemoryBaseRepository<>());
         return meals.save(meal);
     }
     @PostConstruct
@@ -47,14 +47,16 @@ public class InMemoryMealRepository implements MealRepository {
 
     @Override
     public boolean delete(int id, int userId) {
-        InMemoryBaseRepository<Meal> meals = usersMealsMap.get(userId);
+        var meals = usersMealsMap.get(userId);
         return meals != null && meals.delete(id);
     }
+
     @Override
     public Meal get(int id, int userId) {
-        InMemoryBaseRepository<Meal> meals = usersMealsMap.get(userId);
+        var meals = usersMealsMap.get(userId);
         return meals == null ? null : meals.get(id);
     }
+
     @Override
     public List<Meal> getAll(int userId) {
         return getAllFiltered(userId, meal -> true);
@@ -65,7 +67,7 @@ public class InMemoryMealRepository implements MealRepository {
     }
 
     private List<Meal> getAllFiltered(int userId, Predicate<Meal> filter) {
-        InMemoryBaseRepository<Meal> meals = usersMealsMap.get(userId);
+        var meals = usersMealsMap.get(userId);
         return meals == null ? Collections.emptyList() :
                 meals.getCollection().stream()
                         .filter(filter)
