@@ -17,8 +17,11 @@ import java.util.List;
 public class JdbcUserRepository implements UserRepository {
 
     private static final BeanPropertyRowMapper<User> ROW_MAPPER = BeanPropertyRowMapper.newInstance(User.class);
+
     private final JdbcTemplate jdbcTemplate;
+
     private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
+
     private final SimpleJdbcInsert insertUser;
 
     @Autowired
@@ -26,6 +29,7 @@ public class JdbcUserRepository implements UserRepository {
         this.insertUser = new SimpleJdbcInsert(jdbcTemplate)
                 .withTableName("users")
                 .usingGeneratedKeyColumns("id");
+
         this.jdbcTemplate = jdbcTemplate;
         this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
     }
@@ -33,7 +37,6 @@ public class JdbcUserRepository implements UserRepository {
     @Override
     public User save(User user) {
         BeanPropertySqlParameterSource parameterSource = new BeanPropertySqlParameterSource(user);
-
 
         if (user.isNew()) {
             Number newKey = insertUser.executeAndReturnKey(parameterSource);

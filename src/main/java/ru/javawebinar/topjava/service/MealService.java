@@ -1,13 +1,15 @@
 package ru.javawebinar.topjava.service;
 
-import org.springframework.util.Assert;
-import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
 import ru.javawebinar.topjava.model.Meal;
 import ru.javawebinar.topjava.repository.MealRepository;
+import ru.javawebinar.topjava.util.DateTimeUtil;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 
 import static ru.javawebinar.topjava.util.ValidationUtil.checkNotFoundWithId;
@@ -17,7 +19,8 @@ public class MealService {
 
     private final MealRepository repository;
 
-    public MealService(@Qualifier("jdbcMealRepository") MealRepository repository) {
+    @Autowired
+    public MealService(MealRepository repository) {
         this.repository = repository;
     }
 
@@ -30,8 +33,10 @@ public class MealService {
     }
 
     public List<Meal> getBetweenDates(@Nullable LocalDate startDate, @Nullable LocalDate endDate, int userId) {
-           return repository.getBetweenInclusive(startDate, endDate, userId);
-
+        return repository.getBetween(
+                DateTimeUtil.createDateTime(startDate, LocalDate.MIN, LocalTime.MIN),
+                DateTimeUtil.createDateTime(endDate, LocalDate.MAX, LocalTime.MAX),
+                userId);
     }
 
     public List<Meal> getAll(int userId) {

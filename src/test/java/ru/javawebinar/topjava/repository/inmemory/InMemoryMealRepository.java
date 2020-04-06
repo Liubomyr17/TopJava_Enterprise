@@ -10,21 +10,21 @@ import ru.javawebinar.topjava.repository.MealRepository;
 import ru.javawebinar.topjava.util.Util;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-
 @Repository
 public class InMemoryMealRepository implements MealRepository {
     private static final Logger log = LoggerFactory.getLogger(InMemoryMealRepository.class);
+
     // Map  userId -> mealRepository
     private Map<Integer, InMemoryBaseRepository<Meal>> usersMealsMap = new ConcurrentHashMap<>();
 
     {
-        var userMeals = new InMemoryBaseRepository<Meal>();
+        InMemoryBaseRepository<Meal> userMeals = new InMemoryBaseRepository<>();
         usersMealsMap.put(UserTestData.USER_ID, userMeals);
         MealTestData.MEALS.forEach(meal -> userMeals.map.put(meal.getId(), meal));
     }
@@ -32,9 +32,10 @@ public class InMemoryMealRepository implements MealRepository {
     @Override
     public Meal save(Meal meal, int userId) {
         Objects.requireNonNull(meal, "meal must not be null");
-        var meals = usersMealsMap.computeIfAbsent(userId, uid -> new InMemoryBaseRepository<>());
+        InMemoryBaseRepository<Meal> meals = usersMealsMap.computeIfAbsent(userId, uid -> new InMemoryBaseRepository<>());
         return meals.save(meal);
     }
+
     @PostConstruct
     public void postConstruct() {
         log.info("+++ PostConstruct");
@@ -47,13 +48,13 @@ public class InMemoryMealRepository implements MealRepository {
 
     @Override
     public boolean delete(int id, int userId) {
-        var meals = usersMealsMap.get(userId);
+        InMemoryBaseRepository<Meal> meals = usersMealsMap.get(userId);
         return meals != null && meals.delete(id);
     }
 
     @Override
     public Meal get(int id, int userId) {
-        var meals = usersMealsMap.get(userId);
+        InMemoryBaseRepository<Meal> meals = usersMealsMap.get(userId);
         return meals == null ? null : meals.get(id);
     }
 
@@ -62,12 +63,15 @@ public class InMemoryMealRepository implements MealRepository {
         return getAllFiltered(userId, meal -> true);
     }
 
-    public List<Meal> getBetweenInclusive(LocalDate startDate, LocalDate endDate, int userId) {
-        return getAllFiltered(userId, meal -> Util.isBetweenInclusive(meal.getDate(), startDate, endDate));
+    @Override
+    public List<Meal> getBetween(LocalDateTime startDateTime, LocalDateTime endDateTime, int userId) {
+        Objects.requireNonNull(startDateTime, "startDateTime must not be null");
+        Objects.requireNonNull(endDateTime, "endDateTime must not be null");
+        return getAllFiltered(userId, meal -> Util.isBetweenInclusive(meal.getDateTime(), startDateTime, endDateTime));
     }
 
     private List<Meal> getAllFiltered(int userId, Predicate<Meal> filter) {
-        var meals = usersMealsMap.get(userId);
+        InMemoryBaseRepository<Meal> meals = usersMealsMap.get(userId);
         return meals == null ? Collections.emptyList() :
                 meals.getCollection().stream()
                         .filter(filter)

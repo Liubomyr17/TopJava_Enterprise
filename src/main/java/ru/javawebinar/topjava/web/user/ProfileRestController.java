@@ -1,8 +1,9 @@
 package ru.javawebinar.topjava.web.user;
 
 
-import ru.javawebinar.topjava.model.User;
 import org.springframework.stereotype.Controller;
+import ru.javawebinar.topjava.model.User;
+
 import static ru.javawebinar.topjava.web.SecurityUtil.authUserId;
 
 @Controller
