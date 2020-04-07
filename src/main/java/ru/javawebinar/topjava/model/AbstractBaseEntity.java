@@ -1,7 +1,7 @@
 package ru.javawebinar.topjava.model;
 
-
 import org.hibernate.Hibernate;
+
 import javax.persistence.*;
 
 @MappedSuperclass
@@ -14,8 +14,8 @@ public abstract class AbstractBaseEntity {
     @SequenceGenerator(name = "global_seq", sequenceName = "global_seq", allocationSize = 1, initialValue = START_SEQ)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "global_seq")
 
-    //  See https://hibernate.atlassian.net/browse/HHH-3718 and https://hibernate.atlassian.net/browse/HHH-12034
-    //  Proxy initialization when accessing its identifier managed now by JPA_PROXY_COMPLIANCE setting
+//  See https://hibernate.atlassian.net/browse/HHH-3718 and https://hibernate.atlassian.net/browse/HHH-12034
+//  Proxy initialization when accessing its identifier managed now by JPA_PROXY_COMPLIANCE setting
     protected Integer id;
 
     protected AbstractBaseEntity() {
