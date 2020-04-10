@@ -5,7 +5,6 @@ import ru.javawebinar.topjava.model.User;
 
 import java.util.Collections;
 import java.util.Date;
-
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;

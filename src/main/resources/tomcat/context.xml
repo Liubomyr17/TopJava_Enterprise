@@ -6,7 +6,9 @@
   The ASF licenses this file to You under the Apache License, Version 2.0
   (the "License"); you may not use this file except in compliance with
   the License.  You may obtain a copy of the License at
+
       http://www.apache.org/licenses/LICENSE-2.0
+
   Unless required by applicable law or agreed to in writing, software
   distributed under the License is distributed on an "AS IS" BASIS,
   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -39,7 +41,7 @@
               password="password"
               driverClassName="org.postgresql.Driver"
               validationQuery="SELECT 1"
-              maxTotal="10"
+              mixTotal="10"
               minIdle="2"
               maxWaitMillis="20000"
               initialSize="2"
@@ -48,8 +50,8 @@
               removeAbandonedOnBorrow="true"
               testWhileIdle="true"/>
     <!--
-        username="wegxlfzjjgxaxy"
-        password="SSQyKKE_e93kiUCR-ehzMcKCxZ"
-        url="jdbc:postgresql://ec2-54-217-202-110.eu-west-1.compute.amazonaws.com:5432/dehm6lvm8bink0?ssl=true&amp;sslfactory=org.postgresql.ssl.NonValidatingFactory"/>
-    -->
+    username="wegxlfzjjgxaxy"
+    password="SSQyKKE_e93kiUCR-ehzMcKCxZ"
+    url="jdbc:postgresql://ec2-54-217-202-110.eu-west-1.compute.amazonaws.com:5432/dehm6lvm8bink0?ssl=true&amp;sslfactory=org.postgresql.ssl.NonValidatingFactory"/>
+-->
 </Context>

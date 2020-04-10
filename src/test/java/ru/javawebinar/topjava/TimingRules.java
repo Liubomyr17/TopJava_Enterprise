@@ -21,6 +21,7 @@ public class TimingRules {
         @Override
         protected void finished(long nanos, Description description) {
             String result = String.format("%-95s %7d", description.getDisplayName(), TimeUnit.NANOSECONDS.toMillis(nanos));
+            super.finished(nanos, description);
             results.append(result).append('\n');
             log.info(result + " ms\n");
         }
@@ -29,13 +30,13 @@ public class TimingRules {
     public static final ExternalResource SUMMARY = new ExternalResource() {
         @Override
         protected void before() throws Throwable {
-            results.setLength(0);
+            super.before();
         }
 
         @Override
         protected void after() {
             log.info("\n" + DELIM +
-                    "\nTest                                                                                       Duration, ms" +
+                    "\nTest" +
                     "\n" + DELIM + "\n" + results + DELIM + "\n");
         }
     };

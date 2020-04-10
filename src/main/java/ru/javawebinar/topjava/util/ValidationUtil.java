@@ -7,7 +7,6 @@ import ru.javawebinar.topjava.util.exception.NotFoundException;
 public class ValidationUtil {
 
     private ValidationUtil() {
-
     }
 
     public static <T> T checkNotFoundWithId(T object, int id) {
@@ -44,6 +43,7 @@ public class ValidationUtil {
         }
     }
 
+    //  http://stackoverflow.com/a/28565320/548473
     public static Throwable getRootCause(Throwable t) {
         Throwable result = t;
         Throwable cause;

@@ -1,10 +1,6 @@
 package ru.javawebinar.topjava.repository;
 
-import org.springframework.lang.NonNull;
-import org.springframework.lang.Nullable;
-import ru.javawebinar.topjava.model.Meal;
-
-import org.springframework.lang.NonNull;
+import javax.validation.constraints.NotNull;
 import org.springframework.lang.Nullable;
 import ru.javawebinar.topjava.model.Meal;
 
@@ -28,12 +24,13 @@ public interface MealRepository {
     // ORDERED dateTime desc
     List<Meal> getAll(int userId);
 
+    // ORDERED dateTime desc
     default List<Meal> getBetweenInclusive(@Nullable LocalDate startDate, @Nullable LocalDate endDate, int userId) {
         return getBetweenInclusive(getStartInclusive(startDate), getEndExclusive(endDate), userId);
     }
 
     // ORDERED dateTime desc
-    List<Meal> getBetweenInclusive(@NonNull LocalDateTime startDate, @NonNull LocalDateTime endDate, int userId);
+    List<Meal> getBetweenInclusive(@NotNull LocalDateTime startDate, @NotNull LocalDateTime endDate, int userId);
 
     default Meal getWithUser(int id, int userId) {
         throw new UnsupportedOperationException();
