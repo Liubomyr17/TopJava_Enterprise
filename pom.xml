@@ -33,6 +33,8 @@
         <!-- Tests -->
         <junit.jupiter.version>5.5.2</junit.jupiter.version>
         <hamcrest.version>1.3</hamcrest.version>
+        <jsonassert.version>1.5.0</jsonassert.version>
+
 
         <!-- Hibernate -->
         <hibernate.version>5.4.7.Final</hibernate.version>
@@ -180,6 +182,13 @@
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
             <version>${jackson-json.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.skyscreamer</groupId>
+            <artifactId>jsonassert</artifactId>
+            <version>${jsonassert.version}</version>
+            <scope>test</scope>
         </dependency>
 
         <dependency>
