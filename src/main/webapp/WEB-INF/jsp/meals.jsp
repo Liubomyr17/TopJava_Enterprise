@@ -37,6 +37,7 @@
                 </form>
             </div>
             <div class="card-footer text-right">
+
                 <button class="btn btn-primary" onclick="updateFilteredTable()">
                     <span class="fa fa-filter"></span>
                     <spring:message code="meal.filter"/>
