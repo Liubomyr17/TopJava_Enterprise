@@ -2,7 +2,6 @@ var context, form;
 
 function makeEditable(ctx) {
     context = ctx;
-
     context.datatableApi = $("#datatable").DataTable(
         // https://api.jquery.com/jquery.extend/#jQuery-extend-deep-target-object1-objectN
         $.extend(true, ctx.datatableOpts,
@@ -15,7 +14,6 @@ function makeEditable(ctx) {
                 "info": true
             }
         ));
-
 
     form = $('#detailsForm');
     $(document).ajaxError(function (event, jqXHR, options, jsExc) {
@@ -36,10 +34,16 @@ function updateRow(id) {
     $("#modalTitle").html(i18n["editTitle"]);
     $.get(context.ajaxUrl + id, function (data) {
         $.each(data, function (key, value) {
-            form.find("input[name='" + key + "']").val(value);
+            form.find("input[name='" + key + "']").val(
+                key === "dateTime" ? formatDate(value) : value
+            );
         });
         $('#editRow').modal();
     });
+}
+
+function formatDate(date) {
+    return date.replace('T', ' ').substr(0, 16);
 }
 
 function deleteRow(id) {
