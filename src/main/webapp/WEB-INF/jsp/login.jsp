@@ -1,22 +1,12 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <html>
 <jsp:include page="fragments/headTag.jsp"/>
 <body>
-<nav class="navbar navbar-dark bg-dark py-0">
-    <div class="container">
-        <div class="navbar-brand"><img src="resources/images/icon-meal.png"> <spring:message code="app.title"/></div>
-        <form class="form-inline my-2" id="login_form" action="spring_security_check" method="post">
-            <input class="form-control mr-1" type="text" placeholder="Email" name="username">
-            <input class="form-control mr-1" type="password" placeholder="Password" name="password">
-            <button class="btn btn-success" type="submit">
-                <span class="fa fa-sign-in"></span>
-            </button>
-        </form>
-    </div>
-</nav>
+<jsp:include page="fragments/bodyHeader.jsp"/>
 
 <div class="jumbotron py-0">
     <div class="container">
@@ -26,18 +16,18 @@
         <c:if test="${not empty param.message}">
             <div class="message"><spring:message code="${param.message}"/></div>
         </c:if>
-        <br/>
-        <p>
-            <button type="submit" class="btn btn-lg btn-primary" onclick="login('user@yandex.ru', 'password')">
-                <spring:message code="app.login"/> User
-            </button>
-            <button type="submit" class="btn btn-lg btn-primary" onclick="login('admin@gmail.com', 'admin')">
-                <spring:message code="app.login"/> Admin
-            </button>
-        </p>
-        <br/>
-        <div class="lead py-4">Стек технологий: <br>
-            <a href="http://projects.spring.io/spring-security/">Spring Security</a>,            <a href="https://docs.spring.io/spring/docs/current/spring-framework-reference/html/mvc.html">Spring MVC</a>,
+        <sec:authorize access="isAnonymous()">
+            <div class="pt-4">
+                <button type="submit" class="btn btn-lg btn-primary" onclick="login('user@yandex.ru', 'password')">
+                    <spring:message code="app.login"/> User
+                </button>
+                <button type="submit" class="btn btn-lg btn-primary" onclick="login('admin@gmail.com', 'admin')">
+                    <spring:message code="app.login"/> Admin
+                </button>
+            </div>
+        </sec:authorize>
+        <div class="lead py-4">Стек технологий: <a href="http://projects.spring.io/spring-security/">Spring Security</a>,
+            <a href="https://docs.spring.io/spring/docs/current/spring-framework-reference/html/mvc.html">Spring MVC</a>,
             <a href="http://projects.spring.io/spring-data-jpa/">Spring Data JPA</a>,
             <a href="http://spring.io/blog/2014/05/07/preview-spring-security-test-method-security">Spring Security
                 Test</a>,
@@ -61,14 +51,14 @@
     </div>
 </div>
 <div class="container lead">
-    &nbsp;&nbsp;&nbsp;<a href="https://github.com/JavaOPs/topjava">Java Enterprise проект</a> с
-    регистрацией/авторизацией и интерфейсом на основе ролей (USER, ADMIN).
-    Администратор может создавать/редактировать/удалять пользователей, а пользователи - управлять своим
-    профилем и данными (день, еда, калории) через UI (по AJAX) и по REST интерфейсу с базовой авторизацией.
-    Возможна фильтрация данных по датам и времени, при этом цвет записи таблицы еды зависит от того, превышает ли
-    сумма
-    калорий за день норму (редактируемый параметр в профиле пользователя).
-    Весь REST интерфейс покрывается JUnit тестами, используя Spring MVC Test и Spring Security Test.
+    &nbsp;&nbsp;&nbsp;<a href="https://github.com/JavaOPs/topjava">Java Enterprise Project </a> with
+        registration / authorization and role-based interface (USER, ADMIN).
+        The administrator can create / edit / delete users, and users can manage their
+        profile and data (day, food, calories) through the UI (via AJAX) and through the REST interface with basic authorization.
+        It is possible to filter data by date and time, while the color of the food table entry depends on whether it exceeds
+        the amount
+        Calories per day are normal (editable parameter in the user profile).
+        The entire REST interface is covered by JUnit tests using the Spring MVC Test and Spring Security Test.
 </div>
 <jsp:include page="fragments/footer.jsp"/>
 <script type="text/javascript">
