@@ -27,7 +27,7 @@
                 </button>
             </div>
         </sec:authorize>
-        <div class="lead py-4">Стек технологий: <br>
+        <div class="lead py-4"><spring:message code="app.stackTitle"/> <br>
             <a href="http://projects.spring.io/spring-security/">Spring Security</a>,
             <a href="https://docs.spring.io/spring/docs/current/spring-framework-reference/html/mvc.html">Spring MVC</a>,
             <a href="http://projects.spring.io/spring-data-jpa/">Spring Data JPA</a>,
@@ -52,8 +52,7 @@
         </div>
     </div>
 </div>
-<div class="container lead">
-    &nbsp;&nbsp;&nbsp;<a href="https://github.com/JavaOPs/topjava">Java Enterprise Project </a> with registration / authorization and role-based interface (USER, ADMIN). The administrator can create / edit / delete users, and users can manage their profile and data (day, food, calories) through the UI (via AJAX) and through the REST interface with basic authorization. It is possible to filter data by date and time, while the color of the food table entry depends on whether it exceeds the amount Calories per day are normal (editable parameter in the user profile). The entire REST interface is covered by JUnit tests using the Spring MVC Test and Spring Security Test.
+<div class="container lead"><spring:message code="app.description"/>
 </div>
 <jsp:include page="fragments/footer.jsp"/>
 <script type="text/javascript">

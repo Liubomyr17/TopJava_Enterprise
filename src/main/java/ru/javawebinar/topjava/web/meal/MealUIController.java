@@ -10,6 +10,8 @@ import ru.javawebinar.topjava.to.MealTo;
 import ru.javawebinar.topjava.web.AbstractMealController;
 import ru.javawebinar.topjava.util.ValidationUtil;
 import javax.validation.Valid;
+import org.springframework.lang.Nullable;
+
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -34,7 +36,7 @@ public class MealUIController extends AbstractMealController {
     @Override
     @DeleteMapping(value = "/{id}")
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
-    public void delete(@PathVariable("id") int id) {
+    public void delete(@PathVariable int id) {
         super.delete(id);
     }
 
@@ -57,10 +59,10 @@ public class MealUIController extends AbstractMealController {
     @Override
     @GetMapping(value = "/filter", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<MealTo> getBetween(
-            @RequestParam(value = "startDate", required = false) LocalDate startDate,
-            @RequestParam(value = "startTime", required = false) LocalTime startTime,
-            @RequestParam(value = "endDate", required = false) LocalDate endDate,
-            @RequestParam(value = "endTime", required = false) LocalTime endTime) {
+            @RequestParam @Nullable LocalDate startDate,
+            @RequestParam @Nullable LocalTime startTime,
+            @RequestParam @Nullable LocalDate endDate,
+            @RequestParam @Nullable LocalTime endTime) {
         return super.getBetween(startDate, startTime, endDate, endTime);
     }
 }
