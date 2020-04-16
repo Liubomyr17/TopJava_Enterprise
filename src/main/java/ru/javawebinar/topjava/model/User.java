@@ -6,6 +6,8 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.validator.constraints.Range;
 import org.springframework.util.CollectionUtils;
+import ru.javawebinar.topjava.HasEmail;
+
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -23,7 +25,7 @@ import static ru.javawebinar.topjava.util.UserUtil.DEFAULT_CALORIES_PER_DAY;
 })
 @Entity
 @Table(name = "users", uniqueConstraints = {@UniqueConstraint(columnNames = "email", name = "users_unique_email_idx")})
-public class User extends AbstractNamedEntity {
+public class User extends AbstractNamedEntity implements HasEmail {
 
     public static final String DELETE = "User.delete";
     public static final String BY_EMAIL = "User.getByEmail";
@@ -38,6 +40,7 @@ public class User extends AbstractNamedEntity {
     @Column(name = "password", nullable = false)
     @NotBlank
     @Size(min = 5, max = 100)
+    // https://stackoverflow.com/a/12505165/548473
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
 
@@ -54,7 +57,7 @@ public class User extends AbstractNamedEntity {
     @CollectionTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"))
     @Column(name = "role")
     @ElementCollection(fetch = FetchType.EAGER)
-    // Fetch(FetchMode.SUBSELECT)
+//    @Fetch(FetchMode.SUBSELECT)
     @BatchSize(size = 200)
     private Set<Role> roles;
 
@@ -63,8 +66,8 @@ public class User extends AbstractNamedEntity {
     private int caloriesPerDay = DEFAULT_CALORIES_PER_DAY;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")//, cascade = CascadeType.REMOVE, orphanRemoval = true)
-//    @JsonIgnore
     @OrderBy("dateTime DESC")
+//    @JsonIgnore
     protected List<Meal> meals;
 
     public User() {
@@ -88,6 +91,7 @@ public class User extends AbstractNamedEntity {
         setRoles(roles);
     }
 
+    @Override
     public String getEmail() {
         return email;
     }
