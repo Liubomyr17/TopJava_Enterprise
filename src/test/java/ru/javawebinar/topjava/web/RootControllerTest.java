@@ -7,7 +7,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static ru.javawebinar.topjava.UserTestData.ADMIN;
 import static ru.javawebinar.topjava.UserTestData.USER;
 
-
 class RootControllerTest extends AbstractControllerTest {
 
     RootControllerTest() {
@@ -24,7 +23,7 @@ class RootControllerTest extends AbstractControllerTest {
     }
 
     @Test
-    void Auth() throws Exception {
+    void unAuth() throws Exception {
         perform(doGet("users"))
                 .andDo(print())
                 .andExpect(status().is3xxRedirection())

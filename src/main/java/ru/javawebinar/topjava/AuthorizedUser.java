@@ -1,11 +1,8 @@
 package ru.javawebinar.topjava;
 
-import org.springframework.security.core.GrantedAuthority;
 import ru.javawebinar.topjava.model.User;
 import ru.javawebinar.topjava.to.UserTo;
 import ru.javawebinar.topjava.util.UserUtil;
-
-import java.util.Collection;
 
 public class AuthorizedUser extends org.springframework.security.core.userdetails.User {
     private static final long serialVersionUID = 1L;
@@ -16,20 +13,21 @@ public class AuthorizedUser extends org.springframework.security.core.userdetail
         super(user.getEmail(), user.getPassword(), user.isEnabled(), true, true, true, user.getRoles());
         this.userTo = UserUtil.asTo(user);
     }
+
     public int getId() {
         return userTo.id();
-}
+    }
+
     public void update(UserTo newTo) {
         userTo = newTo;
     }
+
     public UserTo getUserTo() {
         return userTo;
     }
 
     @Override
     public String toString() {
-        return "AuthorizedUser{" +
-                "userTo=" + userTo +
-                '}';
+        return userTo.toString();
     }
 }

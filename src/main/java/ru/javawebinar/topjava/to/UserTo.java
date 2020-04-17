@@ -1,9 +1,10 @@
 package ru.javawebinar.topjava.to;
 
 import org.hibernate.validator.constraints.Range;
+import org.hibernate.validator.constraints.SafeHtml;
 import ru.javawebinar.topjava.HasEmail;
 import ru.javawebinar.topjava.util.UserUtil;
-import org.hibernate.validator.constraints.SafeHtml;
+
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;

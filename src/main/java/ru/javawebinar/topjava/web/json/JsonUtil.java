@@ -2,12 +2,11 @@ package ru.javawebinar.topjava.web.json;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
-import java.util.Map;
-
 import com.fasterxml.jackson.databind.ObjectReader;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 import static ru.javawebinar.topjava.web.json.JacksonObjectMapper.getMapper;
 
@@ -21,6 +20,7 @@ public class JsonUtil {
             throw new IllegalArgumentException("Invalid read array from JSON:\n'" + json + "'", e);
         }
     }
+
     public static <T> T readValue(String json, Class<T> clazz) {
         try {
             return getMapper().readValue(json, clazz);
@@ -28,13 +28,15 @@ public class JsonUtil {
             throw new IllegalArgumentException("Invalid read from JSON:\n'" + json + "'", e);
         }
     }
+
     public static <T> String writeValue(T obj) {
         try {
             return getMapper().writeValueAsString(obj);
         } catch (JsonProcessingException e) {
-            throw new IllegalArgumentException("Invalid write to JSON:\n'" + obj + "'", e);
+            throw new IllegalStateException("Invalid write to JSON:\n'" + obj + "'", e);
         }
     }
+
     public static <T> String writeAdditionProps(T obj, String addName, Object addValue) {
         return writeAdditionProps(obj, Map.of(addName, addValue));
     }
@@ -44,5 +46,4 @@ public class JsonUtil {
         map.putAll(addProps);
         return writeValue(map);
     }
-
 }

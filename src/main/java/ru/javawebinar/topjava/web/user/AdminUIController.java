@@ -38,7 +38,7 @@ public class AdminUIController extends AbstractUserController {
             super.create(userTo);
         } else {
             super.update(userTo, userTo.id());
-                }
+        }
     }
 
     @Override

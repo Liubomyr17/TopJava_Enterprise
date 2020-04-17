@@ -7,12 +7,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class RootController {
 
-
     @GetMapping("/")
     public String root() {
         return "redirect:meals";
     }
 
+    //    @Secured("ROLE_ADMIN")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/users")
     public String getUsers() {

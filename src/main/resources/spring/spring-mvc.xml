@@ -31,7 +31,7 @@
             </bean>
         </mvc:message-converters>
         <mvc:argument-resolvers>
-            <bean class="org.springframework.security.web.method.annotation.AuthenticationPrincipalArgumentResolver "/>
+        <bean class="org.springframework.security.web.method.annotation.AuthenticationPrincipalArgumentResolver "/>
         </mvc:argument-resolvers>
     </mvc:annotation-driven>
 
@@ -79,6 +79,7 @@
     </bean>
 
     <mvc:interceptors>
+
         <bean id="localeChangeInterceptor" class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
             <property name="paramName" value="lang"/>
         </bean>

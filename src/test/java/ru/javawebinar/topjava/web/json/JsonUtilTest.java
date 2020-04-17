@@ -14,6 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static ru.javawebinar.topjava.MealTestData.*;
 
 class JsonUtilTest {
+
     @Test
     void readWriteValue() throws Exception {
         String json = JsonUtil.writeValue(ADMIN_MEAL1);
@@ -21,6 +22,7 @@ class JsonUtilTest {
         Meal meal = JsonUtil.readValue(json, Meal.class);
         MEAL_MATCHERS.assertMatch(meal, ADMIN_MEAL1);
     }
+
     @Test
     void readWriteValues() throws Exception {
         String json = JsonUtil.writeValue(MEALS);

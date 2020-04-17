@@ -10,7 +10,6 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import ru.javawebinar.topjava.View;
 import ru.javawebinar.topjava.model.Meal;
 import ru.javawebinar.topjava.to.MealTo;
-import ru.javawebinar.topjava.web.AbstractMealController;
 
 import java.net.URI;
 import java.time.LocalDate;

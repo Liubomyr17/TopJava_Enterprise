@@ -1,6 +1,5 @@
 package ru.javawebinar.topjava.repository.jdbc;
 
-import org.springframework.context.annotation.Profile;
 import org.springframework.dao.support.DataAccessUtils;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -10,12 +9,10 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-import ru.javawebinar.topjava.Profiles;
 import ru.javawebinar.topjava.model.Meal;
 import ru.javawebinar.topjava.repository.MealRepository;
 import ru.javawebinar.topjava.util.ValidationUtil;
 
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -40,11 +37,11 @@ public class JdbcMealRepository implements MealRepository {
         this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
     }
 
-
     @Override
     @Transactional
     public Meal save(Meal meal, int userId) {
         ValidationUtil.validate(meal);
+
         MapSqlParameterSource map = new MapSqlParameterSource()
                 .addValue("id", meal.getId())
                 .addValue("description", meal.getDescription())
@@ -89,7 +86,7 @@ public class JdbcMealRepository implements MealRepository {
     @Override
     public List<Meal> getBetweenInclusive(LocalDateTime startDateTime, LocalDateTime endDateTime, int userId) {
         return jdbcTemplate.query(
-                "SELECT * FROM meals WHERE user_id=? AND CAST(date_time AS DATE) BETWEEN ? AND ? ORDER BY date_time DESC",
+                "SELECT * FROM meals WHERE user_id=? AND date_time >=? AND date_time < ? ORDER BY date_time DESC",
                 ROW_MAPPER, userId, startDateTime, endDateTime);
     }
 }
