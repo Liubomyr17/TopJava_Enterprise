@@ -1,6 +1,8 @@
 
 Website: http://liubomyrtopjavaee.herokuapp.com/
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/006cd39aef9142ae92093f58346654ba)](https://www.codacy.com/manual/Liubomyr17/TopJava_Enterprise?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Liubomyr17/TopJava_Enterprise&amp;utm_campaign=Badge_Grade)
+
 Development of a fully functional Spring / JPA Enterprise application with authorization and role-based access rights using the most popular Java tools and technologies: Maven, Spring MVC, Security, JPA (Hibernate), REST (Jackson), Bootstrap (css, js), datatables, jQuery + plugins, Java 8 Stream and Time API and storage in Postgresql and HSQLDB databases.
 ![topjava_structure](https://user-images.githubusercontent.com/13649199/27433714-8294e6fe-575e-11e7-9c41-7f6e16c5ebe5.jpg)
 
