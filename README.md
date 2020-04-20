@@ -13,4 +13,3 @@ http://liubomyrtopjavaee.herokuapp.com/
     
     Ancient Chinese saying
 
-![alt text](images/Capture1.PNG)
