@@ -13,9 +13,15 @@ Development of a fully functional Spring / JPA Enterprise application with autho
 
 
 ![topjava_structure](src/main/webapp/resources/images/Capture1.PNG)
+
 ![topjava_structure](src/main/webapp/resources/images/Capture2.PNG)
+
 ![topjava_structure](src/main/webapp/resources/images/Capture3.PNG)
+
 ![topjava_structure](src/main/webapp/resources/images/Capture4.PNG)
+
 ![topjava_structure](src/main/webapp/resources/images/Capture5.PNG)
+
 ![topjava_structure](src/main/webapp/resources/images/Capture6.PNG)
+
 ![topjava_structure](src/main/webapp/resources/images/Capture7.PNG)
