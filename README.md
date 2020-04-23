@@ -1,4 +1,6 @@
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/a483d38e028f4deb86058d41865c2729)](https://app.codacy.com/manual/Liubomyr17/TopJava_Enterprise?utm_source=github.com&utm_medium=referral&utm_content=Liubomyr17/TopJava_Enterprise&utm_campaign=Badge_Grade_Dashboard)
+
 Website: http://liubomyrtopjavaee.herokuapp.com/
 
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/006cd39aef9142ae92093f58346654ba)](https://www.codacy.com/manual/Liubomyr17/TopJava_Enterprise?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Liubomyr17/TopJava_Enterprise&amp;utm_campaign=Badge_Grade)
